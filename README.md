@@ -2,6 +2,11 @@
 
 Short physical computing lesson materials for IED Milan 2026 (Design for Commons, 4th-5th year).
 
+## Internet in the classroom
+
+SSID: `Hotspot`
+PASS: `12345678`
+
 ## Project Structure
 
 - `arduino/` - Arduino IDE example for ESP8266 D1 mini
