@@ -13,9 +13,9 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-const char* WIFI_SSID = "salottino";
-const char* WIFI_PASSWORD = "scherze771";
-const char* MQTT_HOST = "192.168.0.41";
+const char* WIFI_SSID = "Hotspot";
+const char* WIFI_PASSWORD = "12345678";
+const char* MQTT_HOST = "192.168.1.100";
 const uint16_t MQTT_PORT = 1883;
 const char* MQTT_USER = "";
 const char* MQTT_PASSWORD = "";

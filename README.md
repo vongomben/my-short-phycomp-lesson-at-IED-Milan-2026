@@ -31,6 +31,7 @@ Attention! You can choose whether to program the boards using Arduino or ESPHome
 
 ![](./img/karen.png)
 
+![](./img/karen2.png)
 
 ### Example Code
 
