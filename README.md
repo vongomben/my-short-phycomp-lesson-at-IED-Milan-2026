@@ -115,6 +115,8 @@ You should receive back output that looks similar to:
 
 `node-red`
 
+visit --> `http://localhost:1880/`
+
 
 3. an MQTT broker locally installed, we are using [Aedes as a Node-RED node](https://flows.nodered.org/node/node-red-contrib-aedes)
 4. Don't forget to install the [Node-RED Dashboard 2](https://dashboard.flowfuse.com/)
