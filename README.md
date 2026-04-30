@@ -98,8 +98,9 @@ Reference codes:
 
 Once installed, open a command prompt and run the following command to ensure Node.js and npm are installed correctly.
 
-Powershell: `node --version; npm --version`
-cmd: `node --version && npm --version`
+- Powershell: `node --version; npm --version`  
+- cmd: `node --version && npm --version`
+- terminal(macos): `node --version; npm --version`
 
 You should receive back output that looks similar to:
 
