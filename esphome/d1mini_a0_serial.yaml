@@ -1,0 +1,35 @@
+esphome:
+  name: d1mini-a0-serial
+  friendly_name: D1 Mini A0 Serial
+
+esp8266:
+  board: d1_mini
+
+logger:
+  baud_rate: 9600
+
+# Enable API and OTA so the node can be managed.
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: "YOUR_WIFI_SSID"
+  password: "YOUR_WIFI_PASSWORD"
+
+  # Fallback AP if Wi-Fi is unavailable.
+  ap:
+    ssid: "D1Mini-A0-Serial Fallback"
+    password: "changeme1234"
+
+sensor:
+  - platform: adc
+    pin: A0
+    id: a0_sensor
+    name: "A0 ADC"
+    update_interval: 100ms
+    on_value:
+      then:
+        - lambda: |-
+            ESP_LOGI("a0", "A0 raw value: %.3f", x);

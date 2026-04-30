@@ -1,0 +1,39 @@
+esphome:
+  name: d1mini-blink-d4
+  friendly_name: D1 Mini Blink D4
+
+esp8266:
+  board: d1_mini
+
+logger:
+
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: "YOUR_WIFI_SSID"
+  password: "YOUR_WIFI_PASSWORD"
+
+  ap:
+    ssid: "D1Mini-Blink-D4 Fallback"
+    password: "changeme1234"
+
+output:
+  - platform: gpio
+    pin:
+      number: D4
+      inverted: true
+    id: led_d4
+
+light:
+  - platform: binary
+    name: "D4 LED"
+    id: d4_led_light
+    output: led_d4
+
+interval:
+  - interval: 500ms
+    then:
+      - light.toggle: d4_led_light
