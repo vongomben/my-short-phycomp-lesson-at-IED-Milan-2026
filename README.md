@@ -95,6 +95,22 @@ Reference codes:
 
 1. [Install Node-RED on your PC](https://nodered.org/docs/getting-started/local)
 2. [Install Node.js if needed](https://nodejs.org/en/download)
+
+Once installed, open a command prompt and run the following command to ensure Node.js and npm are installed correctly.
+
+Powershell: `node --version; npm --version`
+cmd: `node --version && npm --version`
+
+You should receive back output that looks similar to:
+
+`v18.15.0`
+`9.5.0`
+
+### Install node-red 
+
+`npm install -g node-red`
+
+
 3. an MQTT broker locally installed, we are using [Aedes as a Node-RED node](https://flows.nodered.org/node/node-red-contrib-aedes)
 4. Don't forget to install the [Node-RED Dashboard 2](https://dashboard.flowfuse.com/)
 
