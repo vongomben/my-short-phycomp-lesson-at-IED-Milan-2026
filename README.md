@@ -6,6 +6,10 @@ Short physical computing lesson materials for IED Milan 2026 (Design for Commons
 
 - `arduino/` - Arduino IDE example for ESP8266 D1 mini
 - `esphome/` - ESPHome YAML example for ESP8266 D1 mini
+- `node-red/` - Node-RED JSON examples for visualisation and control
+
+Attention! You can choose whether to program the boards using Arduino or ESPHome. It's up to you.
+
 
 ## Arduino
 
@@ -23,10 +27,23 @@ Short physical computing lesson materials for IED Milan 2026 (Design for Commons
 3. Go to `Tools > Board > Boards Manager`.
 4. Search for `esp8266` and install `esp8266 by ESP8266 Community`.
 5. Select your board from `Tools > Board` (for D1 mini, usually `LOLIN(WEMOS) D1 R2 & mini`).
+6. (for MQTT examples) `sketch > include libraries > manage libraries`  search for  `PubSubClient` and install
 
 ### Example Code
 
-See `arduino/d1mini_a0_serial.ino`.
+Reference codes:
+
+- `arduino/d1mini_a0_serial/d1mini_a0_serial.ino` - reads `A0` and prints values on Serial.
+- `arduino/d1mini_blink_d4/d1mini_blink_d4.ino` - blinks onboard LED on `D4`.
+- `arduino/d1mini_fade_d4/d1mini_fade_d4.ino` - PWM fade on onboard LED (`D4`).
+- `arduino/d1mini_mqtt_a0_led/d1mini_mqtt_a0_led.ino` - MQTT with `PubSubClient`:
+  - publishes `A0` on `deviceN/light`
+  - listens on `deviceN/led` for:
+    - `on` -> LED on
+    - `off` -> LED off
+    - `up` -> fade 0 to 255 with 10 ms steps
+    - `down` -> fade 255 to 0 with 10 ms steps
+    - `wave` -> fade 0 to 255 to 0 with 10 ms steps
 
 ## ESPHome
 
@@ -48,4 +65,39 @@ You can install ESPHome in two common ways:
 
 ### Example Configuration
 
-See `esphome/d1mini_a0_serial.yaml`.
+Reference codes:
+
+- `esphome/d1mini_a0_serial.yaml` - reads `A0` and logs values.
+- `esphome/d1mini_blink_d4.yaml` - blinks onboard LED on `D4`.
+- `esphome/d1mini_fade_d4.yaml` - PWM fade on onboard LED (`D4`).
+- `esphome/d1mini_mqtt_a0_led.yaml` - MQTT behavior:
+  - publishes `A0` on `deviceN/light`
+  - listens on `deviceN/led` for:
+    - `on` -> LED on
+    - `off` -> LED off
+    - `up` -> fade 0 to 255 with 10 ms steps
+    - `down` -> fade 255 to 0 with 10 ms steps
+    - `wave` -> fade 0 to 255 to 0 with 10 ms steps
+
+
+## Node-RED
+
+### Install Node-RED
+
+1. [Install Node-RED on your PC](https://nodered.org/docs/getting-started/local)
+2. [Install Node.js if needed](https://nodejs.org/en/download)
+3. an MQTT broker locally installed, we are using [Aedes as a Node-RED node](https://flows.nodered.org/node/node-red-contrib-aedes)
+4. Don't forget to install the [Node-RED Dashboard 2](https://dashboard.flowfuse.com/)
+
+![](./img/node-red01.png)
+
+### Reference files
+
+Currently no Node-RED flow JSON has been added to this repository yet.
+
+
+## The boards
+
+### ESP8266 as Wemos D1 mini
+
+![](./img/wemos-d1.jpeg)

@@ -1,0 +1,147 @@
+substitutions:
+  device_n: "1"  # Change per board: 1, 2, 3...
+  wifi_ssid: "YOUR_WIFI_SSID"
+  wifi_password: "YOUR_WIFI_PASSWORD"
+  mqtt_host: "192.168.1.10"
+  mqtt_user: ""
+  mqtt_password: ""
+
+esphome:
+  name: d1mini-mqtt-a0-led-${device_n}
+  friendly_name: D1 Mini MQTT A0 LED ${device_n}
+
+esp8266:
+  board: d1_mini
+
+logger:
+
+api:
+
+ota:
+  - platform: esphome
+
+wifi:
+  ssid: ${wifi_ssid}
+  password: ${wifi_password}
+  ap:
+    ssid: D1Mini-MQTT-A0-LED-${device_n} Fallback
+    password: changeme1234
+
+mqtt:
+  broker: ${mqtt_host}
+  username: ${mqtt_user}
+  password: ${mqtt_password}
+  on_message:
+    - topic: device${device_n}/led
+      then:
+        - lambda: |-
+            std::string msg = x;
+            for (auto &c : msg) c = tolower(c);
+            id(current_cmd) = msg;
+        - script.stop: cmd_up
+        - script.stop: cmd_down
+        - script.stop: cmd_wave
+        - if:
+            condition:
+              lambda: 'return id(current_cmd) == "on";'
+            then:
+              - light.turn_on:
+                  id: d4_led_light
+                  brightness: 100%
+        - if:
+            condition:
+              lambda: 'return id(current_cmd) == "off";'
+            then:
+              - light.turn_off: d4_led_light
+        - if:
+            condition:
+              lambda: 'return id(current_cmd) == "up";'
+            then:
+              - script.execute: cmd_up
+        - if:
+            condition:
+              lambda: 'return id(current_cmd) == "down";'
+            then:
+              - script.execute: cmd_down
+        - if:
+            condition:
+              lambda: 'return id(current_cmd) == "wave";'
+            then:
+              - script.execute: cmd_wave
+
+globals:
+  - id: current_cmd
+    type: std::string
+    restore_value: no
+    initial_value: '"off"'
+
+output:
+  - platform: esp8266_pwm
+    pin:
+      number: D4
+      inverted: true
+    frequency: 1000 Hz
+    id: led_pwm_d4
+
+light:
+  - platform: monochromatic
+    id: d4_led_light
+    name: D4 LED
+    output: led_pwm_d4
+
+sensor:
+  - platform: adc
+    pin: A0
+    id: a0_sensor
+    name: A0 ADC
+    update_interval: 200ms
+    filters:
+      - multiply: 1023.0
+    on_value:
+      then:
+        - mqtt.publish:
+            topic: device${device_n}/light
+            payload: !lambda |-
+              int raw = (int) roundf(x);
+              return to_string(raw);
+
+script:
+  - id: cmd_up
+    mode: restart
+    then:
+      - repeat:
+          count: 256
+          then:
+            - light.turn_on:
+                id: d4_led_light
+                brightness: !lambda 'return (float) iteration / 255.0f;'
+            - delay: 10ms
+
+  - id: cmd_down
+    mode: restart
+    then:
+      - repeat:
+          count: 256
+          then:
+            - light.turn_on:
+                id: d4_led_light
+                brightness: !lambda 'return (255.0f - (float) iteration) / 255.0f;'
+            - delay: 10ms
+
+  - id: cmd_wave
+    mode: restart
+    then:
+      - repeat:
+          count: 256
+          then:
+            - light.turn_on:
+                id: d4_led_light
+                brightness: !lambda 'return (float) iteration / 255.0f;'
+            - delay: 10ms
+      - repeat:
+          count: 256
+          then:
+            - light.turn_on:
+                id: d4_led_light
+                brightness: !lambda 'return (255.0f - (float) iteration) / 255.0f;'
+            - delay: 10ms
