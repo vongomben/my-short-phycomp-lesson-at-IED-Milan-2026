@@ -29,6 +29,9 @@ Attention! You can choose whether to program the boards using Arduino or ESPHome
 5. Select your board from `Tools > Board` (for D1 mini, usually `LOLIN(WEMOS) D1 R2 & mini`).
 6. (for MQTT examples) `sketch > include libraries > manage libraries`  search for  `PubSubClient` and install
 
+![](./img/karen.png)
+
+
 ### Example Code
 
 Reference codes:
