@@ -1,0 +1,127 @@
+[
+    {
+        "id": "56f341593f1897a2",
+        "type": "inject",
+        "z": "befc761f47b29d08",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "Hello World!",
+        "payloadType": "str",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "bb382910b1e6a938"
+            ]
+        ]
+    },
+    {
+        "id": "5cc711e2e57f9353",
+        "type": "debug",
+        "z": "befc761f47b29d08",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "0b6e268a430e60ae",
+        "type": "mqtt in",
+        "z": "befc761f47b29d08",
+        "name": "",
+        "topic": "device{NUMBER}/light",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "622cbbe03050168a",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 220,
+        "wires": [
+            [
+                "5cc711e2e57f9353"
+            ]
+        ]
+    },
+    {
+        "id": "bb382910b1e6a938",
+        "type": "mqtt out",
+        "z": "befc761f47b29d08",
+        "name": "",
+        "topic": "/bomboclat",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "622cbbe03050168a",
+        "x": 350,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "d6ca1520bc9731d5",
+        "type": "comment",
+        "z": "befc761f47b29d08",
+        "name": "Let's use Hive MQ broker",
+        "info": "",
+        "x": 190,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "622cbbe03050168a",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
