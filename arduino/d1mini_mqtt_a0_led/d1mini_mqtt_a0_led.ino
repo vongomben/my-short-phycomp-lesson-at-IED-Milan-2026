@@ -15,8 +15,8 @@
 
 const char* WIFI_SSID = "Hotspot";
 const char* WIFI_PASSWORD = "12345678";
-// const char* MQTT_HOST = "192.168.1.100"; local broker
-const char* MQTT_HOST = "broker.hivemq.com";
+ const char* MQTT_HOST = "192.168.1.103"; //local broker from teacher's router
+//const char* MQTT_HOST = "broker.hivemq.com";
 const uint16_t MQTT_PORT = 1883;
 const char* MQTT_USER = "";
 const char* MQTT_PASSWORD = "";

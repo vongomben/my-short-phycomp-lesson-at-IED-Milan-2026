@@ -15,8 +15,8 @@ ota:
   - platform: esphome
 
 wifi:
-  ssid: "YOUR_WIFI_SSID"
-  password: "YOUR_WIFI_PASSWORD"
+  ssid: "salottino"
+  password: "scherze771"
 
   # Fallback AP if Wi-Fi is unavailable.
   ap:
